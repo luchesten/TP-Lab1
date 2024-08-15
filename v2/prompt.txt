@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Medallas Olímpicas</title>
+    <!-- Enlaza con Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Registro de Medallas Olímpicas</h1>
+        <div class="card">
+            <div class="card-body">
+                <form id="medalForm">
+                    <div class="form-group">
+                        <label for="country">País</label>
+                        <input type="text" class="form-control" id="country" placeholder="Nombre del país" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gold">Medallas de Oro</label>
+                        <input type="number" class="form-control" id="gold" placeholder="Número de medallas de oro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="silver">Medallas de Plata</label>
+                        <input type="number" class="form-control" id="silver" placeholder="Número de medallas de plata" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bronze">Medallas de Bronce</label>
+                        <input type="number" class="form-control" id="bronze" placeholder="Número de medallas de bronce" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="text-center">Medallas Registradas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>País</th>
+                    <th>Oro</th>
+                    <th>Plata</th>
+                    <th>Bronce</th>
+                </tr>
+            </thead>
+            <tbody id="medalTable">
+                <!-- Aquí se agregarán las filas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Enlaza con Bootstrap y jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('medalForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const country = document.getElementById('country').value;
+            const gold = document.getElementById('gold').value;
+            const silver = document.getElementById('silver').value;
+            const bronze = document.getElementById('bronze').value;
+
+            const table = document.getElementById('medalTable');
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent = country;
+            row.insertCell(1).textContent = gold;
+            row.insertCell(2).textContent = silver;
+            row.insertCell(3).textContent = bronze;
+
+            // Limpiar formulario después de añadir
+            document.getElementById('medalForm').reset();
+        });
+    </script>
+</body>
+</html>
