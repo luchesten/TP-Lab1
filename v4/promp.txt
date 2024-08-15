@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympic Medals</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Olympic Medals</h1>
+        <form id="medal-form">
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" class="form-control" id="country" required>
+            </div>
+            <div class="mb-3">
+                <label for="gold" class="form-label">Gold</label>
+                <input type="number" class="form-control" id="gold" required>
+            </div>
+            <div class="mb-3">
+                <label for="silver" class="form-label">Silver</label>
+                <input type="number" class="form-control" id="silver" required>
+            </div>
+            <div class="mb-3">
+                <label for="bronze" class="form-label">Bronze</label>
+                <input type="number" class="form-control" id="bronze" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="medal-list" class="mt-5">
+            <!-- Medals will be listed here -->
+        </div>
+    </div>
+    <script src="/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('medal-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const country = document.getElementById('country').value;
+            const gold = document.getElementById('gold').value;
+            const silver = document.getElementById('silver').value;
+            const bronze = document.getElementById('bronze').value;
+
+            fetch('/addMedal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ country, gold, silver, bronze })
+            }).then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  // Add logic to update the list of medals on the page
+              });
+        });
+    </script>
+</body>
+</html>
